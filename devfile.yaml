@@ -12,7 +12,7 @@ components:
   - name: jboss-wildfly
     container:
       image: jboss/wildfly:latest
-      memoryLimit: 2Gi
+      memoryLimit: 4Gi
       sourceMapping: /projects
       mountSources: true
       volumeMounts:
@@ -24,7 +24,7 @@ components:
           exposure: public
   - name: m2
     volume:
-      size: 512Mi
+      size: 1Gi
 
 commands:
   - id: build
