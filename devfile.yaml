@@ -9,9 +9,9 @@ projects:
         origin: https://github.com/devashish234073/java-sample-app-jboss.git
 
 components:
-  - name: universal-developer-image
+  - name: jboss-wildfly
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-d071837
+      image: jboss/wildfly:latest
       memoryLimit: 1Gi
       sourceMapping: /projects
       mountSources: true
@@ -30,7 +30,7 @@ commands:
   - id: build
     exec:
       commandLine: "mvn clean package"
-      component: universal-developer-image
+      component: jboss-wildfly
       workingDir: /projects/java-sample-app-jboss
 
   - id: run
@@ -38,11 +38,11 @@ commands:
       commandLine: >
         cp target/*.war /opt/jboss/wildfly/standalone/deployments/ &&
         /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
-      component: universal-developer-image
+      component: jboss-wildfly
       workingDir: /projects/java-sample-app-jboss
 
   - id: test
     exec:
       commandLine: "mvn test"
-      component: universal-developer-image
+      component: jboss-wildfly
       workingDir: /projects/java-sample-app-jboss
