@@ -22,6 +22,9 @@ components:
         - name: http-8080
           targetPort: 8080
           exposure: public
+  - name: m2
+    volume:
+      size: 256Mi
 
 commands:
   - id: build
@@ -43,6 +46,3 @@ commands:
       commandLine: "mvn test"
       component: universal-developer-image
       workingDir: /projects/java-sample-app-jboss
-
-# Remove volumes from the root level
-# If needed, define volumes within components or as part of the environment setup
