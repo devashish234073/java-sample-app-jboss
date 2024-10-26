@@ -26,24 +26,24 @@ components:
 commands:
   - id: build
     exec:
-      command: "mvn clean package"
+      commandLine: "mvn clean package"
       component: universal-developer-image
-      workdir: /projects/java-sample-app-jboss
+      workingDir: /projects/java-sample-app-jboss
 
   - id: run
     exec:
-      command: >
+      commandLine: >
         cp target/*.war /opt/jboss/wildfly/standalone/deployments/ &&
         /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
       component: universal-developer-image
-      workdir: /projects/java-sample-app-jboss
-      parallel: true
+      workingDir: /projects/java-sample-app-jboss
+      isBackground: true
 
   - id: test
     exec:
-      command: "mvn test"
+      commandLine: "mvn test"
       component: universal-developer-image
-      workdir: /projects/java-sample-app-jboss
+      workingDir: /projects/java-sample-app-jboss
 
 volumes:
   - name: m2
