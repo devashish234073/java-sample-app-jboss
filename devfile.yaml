@@ -37,7 +37,6 @@ commands:
         /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
       component: universal-developer-image
       workingDir: /projects/java-sample-app-jboss
-      isBackground: true
 
   - id: test
     exec:
@@ -45,6 +44,5 @@ commands:
       component: universal-developer-image
       workingDir: /projects/java-sample-app-jboss
 
-volumes:
-  - name: m2
-    size: 512Mi
+# Remove volumes from the root level
+# If needed, define volumes within components or as part of the environment setup
