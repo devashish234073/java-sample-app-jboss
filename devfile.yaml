@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  name: java-sample-app-jboss
+  name: java-sample-app-jboss-2
 projects:
   - name: java-sample-app-jboss
     source:

@@ -1,0 +1,63 @@
+schemaVersion: 2.1.0
+metadata:
+  name: java-sample-app-jboss
+projects:
+  - name: java-sample-app-jboss-0
+    source:
+      type: local
+      location: /projects/java-sample-app-jboss
+
+components:
+  - name: jboss
+    container:
+      image: jboss/wildfly:latest
+      memoryLimit: 1Gi
+      endpoints:
+        - name: http
+          targetPort: 8080
+      env:
+        - name: JAVA_OPTS
+          value: "-Duser.timezone=UTC"
+
+  - name: maven
+    container:
+      image: maven:3.8.5-openjdk-8
+      memoryLimit: 512Mi
+      mountSources: true
+      volumeMounts:
+        - name: m2
+          path: /root/.m2
+      endpoints:
+        - name: http-8080
+          targetPort: 8080
+          exposure: public
+      env:
+        - name: MAVEN_OPTS
+          value: "-Dmaven.repo.local=/root/.m2/repository"
+
+commands:
+  - name: build
+    actions:
+      - type: exec
+        command: "mvn clean package"
+        component: maven
+        workdir: /projects/java-sample-app-jboss
+  - name: run
+    actions:
+      - type: exec
+        command: >
+          mvn clean package && cp target/*.war /opt/jboss/wildfly/standalone/deployments/ &&
+          /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
+        component: jboss
+        workdir: /projects/java-sample-app-jboss
+        parallel: true
+  - name: test
+    actions:
+      - type: exec
+        command: "mvn test"
+        component: maven
+        workdir: /projects/java-sample-app-jboss
+
+volumes:
+  - name: m2
+    size: 512Mi
