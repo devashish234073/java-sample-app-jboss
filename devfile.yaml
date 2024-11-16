@@ -12,19 +12,20 @@ components:
   - name: jboss-wildfly
     container:
       image: jboss/wildfly:latest
-      memoryLimit: 2.5Gi
+      memoryLimit: 3Gi
       sourceMapping: /projects
       mountSources: true
       volumeMounts:
         - name: m2
           path: /home/user/.m2
-      endpoints:
-        - name: http-8080
-          targetPort: 8080
-          exposure: public
+        - name: projects
+          path: /projects
   - name: m2
     volume:
       size: 512Mi
+  - name: projects
+    volume:
+      size: 2Gi
 
 commands:
   - id: build
