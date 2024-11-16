@@ -14,7 +14,7 @@ components:
       image: jboss/wildfly:latest
       memoryLimit: 1Gi
       sourceMapping: /projects
-      mountSources: true
+      mountSources: false
   #     volumeMounts:
   #       - name: m2
   #         path: /home/user/.m2
