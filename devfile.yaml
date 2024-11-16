@@ -14,7 +14,7 @@ components:
       image: jboss/wildfly:latest
       memoryLimit: 1Gi
       sourceMapping: /projects
-      mountSources: false
+      mountSources: true
   #     volumeMounts:
   #       - name: m2
   #         path: /home/user/.m2
@@ -27,23 +27,23 @@ components:
   #   volume:
   #     size: 2Gi
 
-commands:
-  - id: build
-    exec:
-      commandLine: "mvn clean package"
-      component: jboss-wildfly
-      workingDir: /projects/java-sample-app-jboss
+# commands:
+#   - id: build
+#     exec:
+#       commandLine: "mvn clean package"
+#       component: jboss-wildfly
+#       workingDir: /projects/java-sample-app-jboss
 
-  - id: run
-    exec:
-      commandLine: >
-        cp target/*.war /opt/jboss/wildfly/standalone/deployments/ &&
-        /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
-      component: jboss-wildfly
-      workingDir: /projects/java-sample-app-jboss
+#   - id: run
+#     exec:
+#       commandLine: >
+#         cp target/*.war /opt/jboss/wildfly/standalone/deployments/ &&
+#         /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
+#       component: jboss-wildfly
+#       workingDir: /projects/java-sample-app-jboss
 
-  - id: test
-    exec:
-      commandLine: "mvn test"
-      component: jboss-wildfly
-      workingDir: /projects/java-sample-app-jboss
+#   - id: test
+#     exec:
+#       commandLine: "mvn test"
+#       component: jboss-wildfly
+#       workingDir: /projects/java-sample-app-jboss
