@@ -15,17 +15,17 @@ components:
       memoryLimit: 2.5Gi
       sourceMapping: /projects
       mountSources: true
-      volumeMounts:
-        - name: m2
-          path: /home/user/.m2
-        - name: projects
-          path: /projects
-  - name: m2
-    volume:
-      size: 512Mi
-  - name: projects
-    volume:
-      size: 2Gi
+  #     volumeMounts:
+  #       - name: m2
+  #         path: /home/user/.m2
+  #       - name: projects
+  #         path: /projects
+  # - name: m2
+  #   volume:
+  #     size: 512Mi
+  # - name: projects
+  #   volume:
+  #     size: 2Gi
 
 commands:
   - id: build
